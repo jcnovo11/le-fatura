@@ -5,10 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>QRCode reader</title>
+		
+		
+		
     </head>
     <body style="background-color: black">
         <script>
-
 		/*! For license information please see html5-qrcode.min.js.LICENSE.txt */
 var __Html5QrcodeLibrary__;
 (() => {
@@ -11609,8 +11611,29 @@ if (window) {
         var Html5QrcodeScanType = window.__Html5QrcodeLibrary__.Html5QrcodeScanType;
     }
 }
+		</script>
 		
-	</script>
+		<div id="show" style="display: flex; flex-direction: column; align-items: center;">
+			<button class="js-toggle-fullscreen-btn toggle-fullscreen-btn" aria-label="Enter fullscreen mode">
+			<svg class="toggle-fullscreen-svg" width="28" height="28" viewBox="-2 -2 28 28">
+				<g class="icon-fullscreen-enter">
+					<path d="M 2 9 v -7 h 7"></path>
+					<path d="M 22 9 v -7 h -7"></path>
+					<path d="M 22 15 v 7 h -7"></path>
+					<path d="M 2 15 v 7 h 7"></path>
+				</g>
+				
+				<g class="icon-fullscreen-leave">
+					<path d="M 24 17 h -7 v 7"></path>
+					<path d="M 0 17 h 7 v 7"></path>
+					<path d="M 0 7 h 7 v -7"></path>
+					<path d="M 24 7 h -7 v -7"></path>
+				</g>
+			</svg>
+			</button>
+		</div>
+		<br><br>
+	
         <div style="
             text-align: center;
             display: flex;
@@ -11632,12 +11655,14 @@ if (window) {
                     background-color: lightgray;"
                 ></div>
             </div>
-            <b></b>
-            <h1>Scanned Result</h1>
+            <br><br><br><br><br><br>
+
+<!--             <h1>Scanned Result</h1> -->
+			
             <div id="show" style="display: flex; flex-direction: column; align-items: center;">
                 <button id="copyButton" style="width: max-content;">Copy</button>
-                <textarea desable id="result" style="width: 600px; height: 330px;"></textarea>
-            </div>
+                <textarea desable id="result" style="width: 500px; height: 100px;"></textarea>
+			</div>
         </div>
         <script>
             const html5Qrcode = new Html5Qrcode('reader');
@@ -11650,7 +11675,7 @@ if (window) {
                     for (const line of lines) {
                         const [key, value] = line.split(':');
                         if (key === "A") {
-                            nif = `NIFxx:${value}\n`;
+                            nif = `NIF:${value}\n`;
                         //} else if (key === "H") {
                         //    resultString += `ATCUD:${value}\n`;
                         } else if (key === "G") {
@@ -11711,5 +11736,52 @@ if (window) {
             // Attach the function to the button's click event
             document.getElementById("copyButton").addEventListener("click", copyToClipboard);
         </script>
+		
+		
+		
+<!-- Para o Full Screen -->
+
+      <script id="rendered-js">
+if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
+  const toggleBtn = document.querySelector('.js-toggle-fullscreen-btn');
+
+  const styleEl = document.createElement('link');
+  styleEl.setAttribute('rel', 'stylesheet');
+  styleEl.setAttribute('href', 'https://codepen.io/tiggr/pen/poJoLyW.css');
+  styleEl.addEventListener('load', function () {
+    toggleBtn.hidden = false;
+  });
+  document.head.appendChild(styleEl);
+
+  toggleBtn.addEventListener('click', function () {
+    if (document.fullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitFullscreenElement) {
+      document.webkitCancelFullScreen();
+    } else if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.documentElement.webkitRequestFullScreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', handleFullscreen);
+  document.addEventListener('webkitfullscreenchange', handleFullscreen);
+
+
+  function handleFullscreen() {
+    if (document.fullscreen || document.webkitFullscreenElement) {
+      toggleBtn.classList.add('on');
+      toggleBtn.setAttribute('aria-label', 'Exit fullscreen mode');
+    } else {
+      toggleBtn.classList.remove('on');
+      toggleBtn.setAttribute('aria-label', 'Enter fullscreen mode');
+    }
+  }
+}
+//# sourceURL=pen.js
+    </script>
+
+		
     </body>
 </html>
